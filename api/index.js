@@ -58,7 +58,7 @@ app.post("/sendmail", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.send("error while sending");
+      res.send("error while sending", err);
     });
 });
 
