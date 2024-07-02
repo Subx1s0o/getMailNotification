@@ -61,3 +61,5 @@ app.post("/sendmail", (req, res) => {
       res.send("error while sending");
     });
 });
+
+export default app;
