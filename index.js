@@ -13,31 +13,28 @@ const PORT = 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.listen(PORT, () => {
-  console.log("server running on port: ", PORT);
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "subx1s0o@gmail.com",
-    pass: process.env.PASS, // Ensure PASS is set in your Vercel environment variables
+    pass: process.env.PASS,
   },
 });
 
 const handlebarOpts = {
   viewEngine: {
-    extName: ".handlebars", // Assuming your templates have the .handlebars extension
+    extName: ".handlebars",
     partialsDir: path.join(__dirname, "../views"),
     defaultLayout: false,
   },
@@ -47,7 +44,7 @@ const handlebarOpts = {
 
 transporter.use("compile", hbs(handlebarOpts));
 
-app.post("/sendmail", (req, res) => {
+app.post("/sendmail", (req, res, next) => {
   const { text, email } = req.body;
 
   const mailOptions = {
@@ -65,13 +62,18 @@ app.post("/sendmail", (req, res) => {
     .then((info) => {
       console.log("Email sent: ", info);
       res.send(
-        "Sended, check your email box. If you don't see it, check the spam folder."
+        "Sent, check your email box. If you don't see it, check the spam folder."
       );
     })
     .catch((err) => {
       console.error("Error while sending email: ", err);
-      res.status(500).send(`Error while sending: ${err.message}`);
+      next(err);
     });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log("Server running on port: ", PORT);
 });
 
 export default app;
