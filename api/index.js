@@ -19,7 +19,9 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.get("/", (req, res) => {
+  res.render("index");
+});
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
