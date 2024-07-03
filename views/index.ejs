@@ -4,6 +4,62 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Bona+Nova+SC:regular,italic,700);
+      body {
+        height: 100vh;
+        font-family: "Bona Nova SC", serif;
+      }
+      form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        max-width: 400px;
+        width: 100%;
+        align-items: center;
+      }
+      label {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0;
+        margin: 0;
+        font-size: 20px;
+
+        width: 100%;
+      }
+
+      input {
+        outline: none;
+        padding: 20px 30px;
+        border-radius: 4px;
+        border: 2px solid #00ff80;
+        transition: all ease 150ms;
+        font-size: 20px;
+      }
+
+      input:hover,
+      input:focus {
+        border-color: #008e47;
+      }
+
+      button {
+        background-color: #007c38;
+        color: #fff;
+        font-weight: 500;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 20px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 20px;
+        padding: 10px 20px;
+      }
+    </style>
   </head>
   <body>
     <form action="/sendmail" method="post">
@@ -13,7 +69,7 @@
       </label>
       <label for="email">
         email <input type="email" id="email" name="email" /> </label
-      ><button type="submit">send</button>
+      ><button type="submit">Send</button>
     </form>
   </body>
 </html>
