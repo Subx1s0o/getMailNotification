@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 import { config } from "dotenv";
 import path from "path";
 import hbs from "nodemailer-express-handlebars";
+import { fileURLToPath } from "url";
 config();
 const app = express();
 const PORT = 3000;
