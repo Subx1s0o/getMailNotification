@@ -31,13 +31,13 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "subx1s0o@gmail.com",
-    pass: process.env.PASS,
+    pass: process.env.PASS, // Ensure PASS is set in your Vercel environment variables
   },
 });
 
 const handlebarOpts = {
   viewEngine: {
-    extName: ".handlebars",
+    extName: ".handlebars", // Assuming your templates have the .handlebars extension
     partialsDir: path.join(__dirname, "../views"),
     defaultLayout: false,
   },
@@ -70,7 +70,7 @@ app.post("/sendmail", (req, res) => {
     })
     .catch((err) => {
       console.error("Error while sending email: ", err);
-      res.status(500).send("Error while sending.");
+      res.status(500).send(`Error while sending: ${err.message}`);
     });
 });
 
